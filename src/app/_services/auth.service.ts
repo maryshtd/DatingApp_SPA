@@ -37,7 +37,9 @@ export class AuthService {
 
     private handleError(error: any) {
       const applicationError = error.headers.get('Application-Error');
-      return throwError(applicationError);
+      if (applicationError) {
+        return throwError(applicationError);
+      }
       const serverError = error.json();
       let modelStateErrors = '';
       if (serverError) {
